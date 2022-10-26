@@ -1,6 +1,16 @@
-import { Outlet } from 'react-router-dom'
+import { useStoreContext } from 'context/StoreContext';
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom'
 
 const Layout = () => {
+  const { account } = useStoreContext()
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!account) navigate('/')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account]);
+
   return (
     <div className='bg-[#202845] grid place-items-center w-screen h-screen'>
       <div className="text-white text-center">

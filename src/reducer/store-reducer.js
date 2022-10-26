@@ -2,6 +2,7 @@ export const ACTION_TYPES = {
     DISABLE_BUTTON: 'disable_button',
     ENABLE_BUTTON: 'enable_button',
     CONNECT_ACCOUNT: 'connect_account',
+    SELECT_ROLE: 'select_role',
 }
 
 
@@ -26,6 +27,13 @@ export const storeReducer = (state, action) => {
                 ...state,
                 isButtonDisabled: false,
                 account: payload
+            }
+        }
+
+        case ACTION_TYPES.SELECT_ROLE: {
+            return {
+                ...state,
+                role: payload
             }
         }
 

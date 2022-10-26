@@ -6,7 +6,7 @@ import { ACTION_TYPES } from "reducer/store-reducer"
 
 
 const Landing = () => {
-  const { dispatch, reach } = useStoreContext()
+  const { dispatch, reach, isButtonDisabled } = useStoreContext()
   const navigate = useNavigate()
 
   const connectAccount = async () => {
@@ -27,7 +27,11 @@ const Landing = () => {
   }
   return (
     <div className="">
-      <Button title='connect account' handleClick={connectAccount} />
+      <Button
+        title='connect account'
+        disabled={isButtonDisabled}
+        handleClick={connectAccount}
+      />
       <p className="w-4/5 mx-auto mt-10">Morra is a hand game where each player simultaneously reveals their hand, extending any number of fingers, and calls out a number. Any player who successfully guesses the total number of fingers revealed by all players combined scores a point.</p>
     </div>
   )

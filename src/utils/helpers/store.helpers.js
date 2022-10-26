@@ -1,6 +1,8 @@
 const initialState = {
     account: '',
-    isButtonDisabled: false
+    isButtonDisabled: false,
+    role:'',
+    wager:'',
 }
 
 export {
