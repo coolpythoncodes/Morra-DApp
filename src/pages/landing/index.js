@@ -1,11 +1,30 @@
 import Button from "component/button"
 import { useStoreContext } from "context/StoreContext"
+import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
+import { ACTION_TYPES } from "reducer/store-reducer"
 
 
 const Landing = () => {
+  const { dispatch, reach } = useStoreContext()
+  const navigate = useNavigate()
 
-  const { connectAccount } = useStoreContext()
-
+  const connectAccount = async () => {
+    dispatch({ type: ACTION_TYPES.DISABLE_BUTTON })
+    try {
+      const acc = await reach.getDefaultAccount()
+      dispatch({
+        type: ACTION_TYPES.CONNECT_ACCOUNT,
+        payload: acc,
+      })
+      navigate('/select-role')
+    } catch (error) {
+      toast.error('Could not connect account')
+      dispatch({
+        type: ACTION_TYPES.ENABLE_BUTTON
+      })
+    }
+  }
   return (
     <div className="">
       <Button title='connect account' handleClick={connectAccount} />
