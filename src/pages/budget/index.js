@@ -4,16 +4,38 @@ import { useStoreContext } from "context/StoreContext"
 import { useNavigate } from "react-router-dom"
 import Input from "component/input"
 import toast from "react-hot-toast"
+import * as backend from 'build/index.main.mjs'
+import { ACTION_TYPES } from "reducer/store-reducer"
 
 const Budget = () => {
     const [balance, setBalance] = useState()
     const [wager, setWager] = useState('')
-    const { account, getBalance, role, reach } = useStoreContext()
+    const { account, getBalance, role, reach, dispatch, Deployer } = useStoreContext()
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        if(balance < wager) toast("Insufficient funds")
+        if(Number(balance) < Number(wager)) toast.error("Insufficient funds")
+
+        const ctc = account.contract(backend)
+        const notification = toast.loading('Deploying... please wait')
+        try {
+            backend.Alice(ctc, Deployer)
+            const ctcInfo = JSON.stringify(await ctc.getInfo(), null, 2)
+            toast.success('Deployment was successful',{
+                id: notification
+            })
+            navigate('/wait-for-attacher')
+            dispatch({
+                type:ACTION_TYPES.DEPLOY,
+                payload: ctcInfo
+            })
+        } catch (error) {
+            console.error(error)
+            toast.error("Something went wrong",{
+                id: notification
+            })
+        }
 
     }
 

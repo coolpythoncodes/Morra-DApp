@@ -1,6 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import toast from "react-hot-toast";
-import { ACTION_TYPES, storeReducer } from 'reducer/store-reducer';
+import { storeReducer } from 'reducer/store-reducer';
 import { ALGO_MyAlgoConnect as MyAlgoConnect } from '@reach-sh/stdlib';
 import { initialState } from "utils/helpers/store.helpers";
 import { loadStdlib } from '@reach-sh/stdlib'
@@ -20,6 +19,28 @@ const StoreContextProvider = ({ children }) => {
         const bal = reach.formatCurrency(balAtomic, 4)
         return bal
     }
+
+    const Player = {
+        random: () => reach.hasRandom.random(),
+        getFinger: ()=> {
+            return 4
+        },
+        getGuess: ()=>{
+            return 5
+        },
+        seeOutcome: (outcome)=>{
+            console.log('outcome')
+        },
+        informTimeout: ()=> {
+            console.log('time out')
+        }
+    }
+
+    const Deployer = {
+        ...Player,
+        wager: reach.parseCurrency(Number(state.wager)),
+        deadline: { ETH: 10, ALGO: 100, CFX: 1000 }[reach.connector],
+    }
     return (
         <StoreContext.Provider 
             value={{ 
@@ -27,6 +48,7 @@ const StoreContextProvider = ({ children }) => {
                 dispatch, 
                 getBalance, 
                 reach,
+                Deployer,
                 ...state 
                 }}>
             {children}

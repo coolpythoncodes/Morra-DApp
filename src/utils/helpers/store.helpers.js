@@ -1,8 +1,9 @@
 const initialState = {
     account: '',
     isButtonDisabled: false,
-    role:'',
-    wager:'',
+    role: '',
+    wager: '',
+    ctcInfo: '',
 }
 
 export {
