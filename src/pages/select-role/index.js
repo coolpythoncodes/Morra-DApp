@@ -16,7 +16,11 @@ const SelectRole = () => {
       type: ACTION_TYPES.SELECT_ROLE,
       payload: role
     })
+    dispatch({
+      type:ACTION_TYPES.ENABLE_BUTTON
+    })
 
+    navigate(`${role === 'deployer' ? '/budget' : '/attach'}`)
   }
 
   return (
@@ -29,7 +33,8 @@ const SelectRole = () => {
           <Button 
             name='deployer' 
             handleClick={handleClick} 
-            title="Deployer" 
+            title="Deployer"
+            disabled={isButtonDisabled} 
           />
           <p className="mt-2">
             Set the wager, deploy the contract
@@ -37,7 +42,13 @@ const SelectRole = () => {
         </div>
 
         <div>
-          <Button title="Attacher" />
+          <Button 
+            name='attacher'
+            handleClick={handleClick} 
+            title="Attacher" 
+            disabled={isButtonDisabled}
+
+          />
           <p className="mt-2">
             Attach to the Deployer's contract
           </p>

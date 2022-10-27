@@ -3,6 +3,7 @@ export const ACTION_TYPES = {
     ENABLE_BUTTON: 'enable_button',
     CONNECT_ACCOUNT: 'connect_account',
     SELECT_ROLE: 'select_role',
+    SET_WAGER: 'set_wager'
 }
 
 
@@ -34,6 +35,13 @@ export const storeReducer = (state, action) => {
             return {
                 ...state,
                 role: payload
+            }
+        }
+
+        case ACTION_TYPES.SET_WAGER: {
+            return{
+                ...state,
+                wager: payload
             }
         }
 

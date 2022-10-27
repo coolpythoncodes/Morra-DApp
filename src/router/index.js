@@ -1,4 +1,6 @@
 import Layout from "component/layout"
+import Attach from "pages/attach"
+import Budget from "pages/budget"
 import Landing from "pages/landing"
 import SelectRole from "pages/select-role"
 import { Toaster } from "react-hot-toast"
@@ -9,6 +11,8 @@ const router = createBrowserRouter(
         <Route path="/" element={<Layout />}>
             <Route index element={<Landing />} />
             <Route path='/select-role' element={<SelectRole />} />
+            <Route path='/budget' element={<Budget />} />
+            <Route path='/attach' element={<Attach />} />
         </Route>
     )
 )
