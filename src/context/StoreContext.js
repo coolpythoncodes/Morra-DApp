@@ -1,13 +1,13 @@
 import { createContext, useContext, useReducer } from "react";
-import { storeReducer } from 'reducer/store-reducer';
+import { ACTION_TYPES, storeReducer } from 'reducer/store-reducer';
 import { ALGO_MyAlgoConnect as MyAlgoConnect } from '@reach-sh/stdlib';
 import { initialState } from "utils/helpers/store.helpers";
 import { loadStdlib } from '@reach-sh/stdlib'
 
 const reach = loadStdlib('ALGO')
-reach.setWalletFallback(reach.walletFallback({
-    providerEnv: 'TestNet', MyAlgoConnect
-}));
+// reach.setWalletFallback(reach.walletFallback({
+//     providerEnv: 'TestNet', MyAlgoConnect
+// }));
 
 const StoreContext = createContext()
 
@@ -20,18 +20,35 @@ const StoreContextProvider = ({ children }) => {
         return bal
     }
 
+    const acceptWager = async (_wager) => {
+
+        const wager = reach.formatCurrency(_wager, 4)
+        return await new Promise(resolveAcceptP => {
+            console.log('resolveAcceptP',resolveAcceptP)
+            dispatch({
+                type: ACTION_TYPES.ATTACH,
+                payload: {
+                    wager,
+                    resolveAcceptP,
+                },
+            })
+
+        }
+        )
+    }
+
     const Player = {
         random: () => reach.hasRandom.random(),
-        getFinger: ()=> {
+        getFinger: () => {
             return 4
         },
-        getGuess: ()=>{
+        getGuess: () => {
             return 5
         },
-        seeOutcome: (outcome)=>{
+        seeOutcome: (outcome) => {
             console.log('outcome')
         },
-        informTimeout: ()=> {
+        informTimeout: () => {
             console.log('time out')
         }
     }
@@ -41,16 +58,23 @@ const StoreContextProvider = ({ children }) => {
         wager: reach.parseCurrency(Number(state.wager)),
         deadline: { ETH: 10, ALGO: 100, CFX: 1000 }[reach.connector],
     }
+
+    const Attacher = {
+        ...Player,
+        acceptWager,
+    }
     return (
-        <StoreContext.Provider 
-            value={{ 
-                state, 
-                dispatch, 
-                getBalance, 
+        <StoreContext.Provider
+            value={{
+                state,
+                dispatch,
+                getBalance,
                 reach,
                 Deployer,
-                ...state 
-                }}>
+                Attacher,
+                acceptWager,
+                ...state
+            }}>
             {children}
         </StoreContext.Provider>
     )

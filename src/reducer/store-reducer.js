@@ -5,6 +5,7 @@ export const ACTION_TYPES = {
     SELECT_ROLE: 'select_role',
     SET_WAGER: 'set_wager',
     DEPLOY: 'deploy',
+    ATTACH: 'attach',
 }
 
 
@@ -49,7 +50,15 @@ export const storeReducer = (state, action) => {
         case ACTION_TYPES.DEPLOY: {
             return {
                 ...state,
-                ctcInfo: payload
+                ctcInfo: payload,
+            }
+        }
+
+        case ACTION_TYPES.ATTACH : {
+            return {
+                ...state,
+                wager: payload.wager,
+                resolveAcceptP: payload.resolveAcceptP
             }
         }
 

@@ -1,9 +1,14 @@
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import Button from "component/button"
 import { useStoreContext } from "context/StoreContext"
 
 const WaitForAttacher = () => {
-  const { ctcInfo } = useStoreContext()
+  const { ctcInfo, role } = useStoreContext()
+  const navigate = useNavigate()
+
   const sleep = (milliseconds) => new Promise(resolve => setTimeout(resolve, milliseconds))
+
   const copyToClipboard = async (button) => {
     navigator.clipboard.writeText(ctcInfo);
     const origInnerHTML = button.innerHTML;
@@ -13,6 +18,12 @@ const WaitForAttacher = () => {
     button.innerHTML = origInnerHTML;
     button.disabled = false;
   }
+  
+  useEffect(() => {
+    if (role !== 'deployer') navigate('/select-role')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [role])
+
   return (
     <div className="">
       <p>Waiting for Attacher to join...</p>

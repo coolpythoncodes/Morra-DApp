@@ -4,6 +4,7 @@ const initialState = {
     role: '',
     wager: '',
     ctcInfo: '',
+    resolveAcceptP: '',
 }
 
 export {

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { ACTION_TYPES } from "reducer/store-reducer"
 
 const SelectRole = () => {
-  const { dispatch, reach, isButtonDisabled } = useStoreContext()
+  const { dispatch, isButtonDisabled } = useStoreContext()
   const navigate = useNavigate()
 
   const handleClick = (e) => {
@@ -20,7 +20,7 @@ const SelectRole = () => {
       type:ACTION_TYPES.ENABLE_BUTTON
     })
 
-    navigate(`${role === 'deployer' ? '/budget' : '/attach'}`)
+    navigate(`${role === 'deployer' ? '/wager' : '/attach'}`)
   }
 
   return (
