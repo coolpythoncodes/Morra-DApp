@@ -26,7 +26,7 @@ const Morra = () => {
     }
 
     const handleClick = async () => {
-        if (!finger && !guess) {
+        if ((!finger || !guess) && (finger !== 0 && guess !== 0)) {
             toast.error('a finger and guess are required')
         } else {
             resolveFingersAndGuessP([finger,guess])

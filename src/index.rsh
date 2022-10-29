@@ -14,7 +14,7 @@ const Player = {
 }
 
 const [isFinger, ZERO, ONE, TWO, THREE, FOUR, FIVE] = makeEnum(6)
-const [isGuess, GUESS_ZERO, GUESS_ONE, GUESS_TWO, GUESS_THREE, GUESS_FOUR, GUESS_FIVE] = makeEnum(6)
+const [isGuess, GUESS_ZERO, GUESS_ONE, GUESS_TWO, GUESS_THREE, GUESS_FOUR, GUESS_FIVE, GUESS_SIX, GUESS_SEVEN, GUESS_EIGHT, GUESS_NINE, GUESS_TEN] = makeEnum(11)
 const [isOutcome, A_WINS, B_WINS, DRAW] = makeEnum(3)
 
 const winner = (getAFingers, getAGuess, getBFingers, getBGuess) => {
