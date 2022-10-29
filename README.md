@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![](https://img.shields.io/badge/Bootcamp-blueviolet)
 
-## Available Scripts
+[![GitHub issues][issues-shield]][issues-url]
+[![GitHub forks][forks-shield]][forks-url]
+[![GitHub stars][star-shield]][star-url]
+[![GitHub license][license-shield]][license-url]
 
-In the project directory, you can run:
 
-### `yarn start`
+# Morra DApp Game
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> A Morra DApp game on Algorand.  Morra is a hand game where each player simultaneously reveals their hand, extending any number of fingers, and calls out a number. Any player who successfully guesses the total number of fingers revealed by all players combined scores a point.
 
-### `yarn test`
+## Built With
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Reach](https://reach.sh/)
 
-### `yarn build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To get a local copy up and running follow these simple example steps.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
+- Running on [Ubuntu](https://ubuntu.com/) or similar OS.
+- Installed [Make](https://linuxhint.com/install-make-ubuntu/).
+- Installed [Docker](https://www.docker.com/) and Docker-Compose. **Use sudo apt command**
+- Given docker command admin rights. [Here](https://docs.docker.com/engine/install/linux-postinstall/).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Install
+```bash
+git clone https://github.com/coolpythoncodes/Morra-DApp.git
+```
 
-### `yarn eject`
+### Usage
+```bash
+cd Morra-DApp
+yarn install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#Get your development server running.
+yarn start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🤝 Contributing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Contributions, issues, and feature requests are welcome!
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Feel free to check the [issues page](../../issues/).
 
-## Learn More
+## Show your support
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Give a ⭐ if you like this project!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📝 License
 
-### Code Splitting
+This project is [MIT](./MIT.md) licensed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[issues-shield]: https://img.shields.io/github/issues/coolpythoncodes/Morra-DApp?style=for-the-badge
+[issues-url]: https://github.com/coolpythoncodes/Morra-DApp/issues
+[forks-shield]: https://img.shields.io/github/forks/coolpythoncodes/Morra-DApp?style=for-the-badge
+[forks-url]: https://github.com/coolpythoncodes/Morra-DApp/network
+[star-shield]: https://img.shields.io/github/stars/coolpythoncodes/Morra-DApp?style=for-the-badge
+[star-url]: https://github.com/coolpythoncodes/Morra-DApp/stargazers
+[license-shield]: https://img.shields.io/github/license/coolpythoncodes/Morra-DApp?style=for-the-badge
+[license-url]: https://github.com/coolpythoncodes/Morra-DApp/blob/main/LICENSE.md
