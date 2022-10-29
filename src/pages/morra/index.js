@@ -6,7 +6,7 @@ import GuessSquare from 'component/guess-square'
 import toast from 'react-hot-toast'
 
 const Morra = () => {
-    const { dispatch, finger, guess, resolveFingersAndGuessP,state } = useStoreContext()
+    const { dispatch, finger, guess, resolveFingersAndGuessP } = useStoreContext()
 
     const fingersArray = [...Array(6).keys()]
     const guessArray = [...Array(11).keys()]
@@ -31,7 +31,6 @@ const Morra = () => {
         } else {
             resolveFingersAndGuessP([finger,guess])
         }
-        console.log(state)
     }
 
     return (

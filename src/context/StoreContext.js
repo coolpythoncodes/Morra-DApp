@@ -6,9 +6,9 @@ import { loadStdlib } from '@reach-sh/stdlib'
 import { useNavigate } from "react-router-dom";
 
 const reach = loadStdlib('ALGO')
-// reach.setWalletFallback(reach.walletFallback({
-//     providerEnv: 'TestNet', MyAlgoConnect
-// }));
+reach.setWalletFallback(reach.walletFallback({
+    providerEnv: 'TestNet', MyAlgoConnect
+}));
 
 const StoreContext = createContext()
 
@@ -49,11 +49,13 @@ const StoreContextProvider = ({ children }) => {
                     payload: resolveFingersAndGuessP
                 })
             })
-            
-            return [fingersAndGuess[0],fingersAndGuess[1]]
+            navigate('/waiting-for-results')
+            dispatch({
+                type: ACTION_TYPES.CLEAR_GAME,
+            })
+            return fingersAndGuess
         },
         seeOutcome: (outcome) => {
-            console.log('outcome',outcome)
             navigate('/see-outcome')
             const outcomeValue = parseInt(outcome)
             dispatch({
@@ -62,7 +64,7 @@ const StoreContextProvider = ({ children }) => {
             })
         },
         informTimeout: () => {
-            console.log('time out')
+            navigate('/time-out')
         }
     }
 

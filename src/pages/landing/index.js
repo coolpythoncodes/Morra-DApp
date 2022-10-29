@@ -8,13 +8,13 @@ import { ACTION_TYPES } from "reducer/store-reducer"
 const Landing = () => {
   const { dispatch, reach, isButtonDisabled } = useStoreContext()
   const navigate = useNavigate()
-  const startingBalance = reach.parseCurrency(100)
+  // const startingBalance = reach.parseCurrency(100)
 
   const connectAccount = async () => {
     dispatch({ type: ACTION_TYPES.DISABLE_BUTTON })
     try {
-      // const acc = await reach.getDefaultAccount()
-      const acc = await reach.newTestAccount(startingBalance)
+      const acc = await reach.getDefaultAccount()
+      // const acc = await reach.newTestAccount(startingBalance)
 
       dispatch({
         type: ACTION_TYPES.CONNECT_ACCOUNT,

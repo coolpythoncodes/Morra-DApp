@@ -19,12 +19,12 @@ const [isOutcome, A_WINS, B_WINS, DRAW] = makeEnum(3)
 
 const winner = (getAFingers, getAGuess, getBFingers, getBGuess) => {
   const totalFingers = getAFingers + getBFingers
-  if (getAGuess == totalFingers) {
-    return A_WINS
-  } else if (getBGuess == totalFingers) {
-    return B_WINS
-  } else if (getAGuess == getBGuess) {
+  if (getAGuess === getBGuess) {
     return DRAW
+  } else if (getBGuess === totalFingers) {
+    return B_WINS
+  } else if (getAGuess === totalFingers) {
+    return A_WINS
   } else {
     return DRAW
   }
@@ -85,7 +85,7 @@ export const main = Reach.App(() => {
     A.only(() => {
       // const _getAGuess = interact.getGuess()
       // const _getAFingers = interact.getFingers()
-      const [_getAGuess, _getAFingers] = interact.getFingersAndGuess()
+      const [_getAFingers, _getAGuess] = interact.getFingersAndGuess()
       const [_commitAFinger, _saltAFinger] = makeCommitment(interact, _getAFingers)
       const [_commitAGuess, _saltAGuess] = makeCommitment(interact, _getAGuess)
       const commitAFinger = declassify(_commitAFinger)

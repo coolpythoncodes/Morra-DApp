@@ -11,7 +11,8 @@ export const ACTION_TYPES = {
     SEE_OUTCOME: 'see_outcome',
     FINGERS_AND_GUESS: 'fingers_and_guess',
     PLAY_GUESS: 'play_guess',
-    PLAY_FINGER: 'play_finger'
+    PLAY_FINGER: 'play_finger',
+    CLEAR_GAME: 'clear_game'
 }
 
 
@@ -100,6 +101,14 @@ export const storeReducer = (state, action) => {
             return {
                 ...state,
                 resolveFingersAndGuessP: payload
+            }
+        }
+
+        case ACTION_TYPES.CLEAR_GAME: {
+            return {
+                ...state,
+                finger: '',
+                guess: ''
             }
         }
 
