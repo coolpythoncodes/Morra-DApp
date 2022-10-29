@@ -6,6 +6,12 @@ export const ACTION_TYPES = {
     SET_WAGER: 'set_wager',
     DEPLOY: 'deploy',
     ATTACH: 'attach',
+    SUBMIT_PLAY: 'submit_play',
+    GET_GUESS: 'get_guess',
+    SEE_OUTCOME: 'see_outcome',
+    FINGERS_AND_GUESS: 'fingers_and_guess',
+    PLAY_GUESS: 'play_guess',
+    PLAY_FINGER: 'play_finger'
 }
 
 
@@ -54,11 +60,46 @@ export const storeReducer = (state, action) => {
             }
         }
 
-        case ACTION_TYPES.ATTACH : {
+        case ACTION_TYPES.ATTACH: {
             return {
                 ...state,
                 wager: payload.wager,
                 resolveAcceptP: payload.resolveAcceptP
+            }
+        }
+
+        case ACTION_TYPES.PLAY_FINGER: {
+            return {
+                ...state,
+                finger: payload,
+            }
+        }
+        
+        case ACTION_TYPES.PLAY_GUESS: {
+            return {
+                ...state,
+                guess: payload,
+            }
+        }
+
+        case ACTION_TYPES.SUBMIT_PLAY: {
+            return{
+                ...state,
+                resolveFingersAndGuessP: payload
+            }
+        }
+
+        case ACTION_TYPES.SEE_OUTCOME: {
+            return {
+                ...state,
+                seeOutcome: payload
+            }
+        }
+
+        case ACTION_TYPES.FINGERS_AND_GUESS: {
+            return {
+                ...state,
+                resolveFingersAndGuessP: payload
             }
         }
 

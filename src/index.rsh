@@ -1,9 +1,14 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable no-loop-func */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 'reach 0.1';
 
 const Player = {
   ...hasRandom,
-  getFingers: Fun([], UInt),
-  getGuess: Fun([], UInt),
+  // getFingers: Fun([], UInt),
+  // getGuess: Fun([], UInt),
+  getFingersAndGuess: Fun([], Tuple(UInt, UInt)),
   seeOutcome: Fun([UInt], Null),
   informTimeout: Fun([], Null)
 }
@@ -78,34 +83,45 @@ export const main = Reach.App(() => {
     commit()
 
     A.only(() => {
-      const getAGuess = declassify(interact.getGuess())
-      const _getAFingers = interact.getFingers()
-      const [_commitA, _saltA] = makeCommitment(interact, _getAFingers)
-      const commitA = declassify(_commitA)
+      // const _getAGuess = interact.getGuess()
+      // const _getAFingers = interact.getFingers()
+      const [_getAGuess, _getAFingers] = interact.getFingersAndGuess()
+      const [_commitAFinger, _saltAFinger] = makeCommitment(interact, _getAFingers)
+      const [_commitAGuess, _saltAGuess] = makeCommitment(interact, _getAGuess)
+      const commitAFinger = declassify(_commitAFinger)
+      const commitAGuess = declassify(_commitAGuess)
     });
-    A.publish(commitA, getAGuess)
+    A.publish(commitAFinger, commitAGuess)
       .timeout(relativeTime(deadline), () => closeTo(B, informTimeout));
     commit()
 
-    unknowable(B, A(_getAFingers, _saltA))
+    unknowable(B, A(_getAFingers, _saltAFinger))
+    unknowable(B, A(_getAGuess, _saltAGuess))
 
     B.only(() => {
-      const getBFingers = declassify(interact.getFingers());
-      const getBGuess = declassify(interact.getGuess());
+      // const getBFingers = declassify(interact.getFingers());
+      // const getBGuess = declassify(interact.getGuess());
+      const [getBFingers, getBGuess] = declassify(interact.getFingersAndGuess())
     });
     B.publish(getBFingers, getBGuess)
       .timeout(relativeTime(deadline), () => closeTo(A, informTimeout));
     commit()
 
     A.only(() => {
-      const saltA = declassify(_saltA)
+      const saltAFinger = declassify(_saltAFinger)
       const getAFingers = declassify(_getAFingers)
+
+      const saltAGuess = declassify(_saltAGuess)
+      const getAGuess = declassify(_getAGuess)
     });
-    A.publish(saltA, getAFingers);
-    checkCommitment(commitA, saltA, getAFingers)
+    A.publish(saltAFinger, getAFingers, saltAGuess, getAGuess)
+      .timeout(relativeTime(deadline), () => closeTo(B, informTimeout));
+    ;
+    checkCommitment(commitAFinger, saltAFinger, getAFingers)
+    checkCommitment(commitAGuess, saltAGuess, getAGuess)
 
     outcome = winner(getAFingers, getAGuess, getBFingers, getBGuess)
-    continue
+    continue;
   }
 
   assert(outcome == A_WINS || outcome == B_WINS)

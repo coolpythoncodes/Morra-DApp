@@ -49,10 +49,6 @@ const AcceptTerms = () => {
       <p>Budget: {wager} {reach.standardUnit}</p>
       <br />
       <Button disabled={isButtonDisabled} title='Accept terms' handleClick={acceptTerms} />
-      {/* <button
-      disabled={disableButton}
-      onClick={termsAccepted}
-      >Accept terms</button> */}
     </div>)
 }
 

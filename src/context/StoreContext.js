@@ -3,6 +3,7 @@ import { ACTION_TYPES, storeReducer } from 'reducer/store-reducer';
 import { ALGO_MyAlgoConnect as MyAlgoConnect } from '@reach-sh/stdlib';
 import { initialState } from "utils/helpers/store.helpers";
 import { loadStdlib } from '@reach-sh/stdlib'
+import { useNavigate } from "react-router-dom";
 
 const reach = loadStdlib('ALGO')
 // reach.setWalletFallback(reach.walletFallback({
@@ -13,6 +14,8 @@ const StoreContext = createContext()
 
 const StoreContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(storeReducer, initialState)
+    const OUTCOME = ['Alice Wins!', 'Bob Wins!', "Draw"]
+    const navigate = useNavigate()
 
     const getBalance = async (acc) => {
         const balAtomic = await reach.balanceOf(acc)
@@ -24,7 +27,6 @@ const StoreContextProvider = ({ children }) => {
 
         const wager = reach.formatCurrency(_wager, 4)
         return await new Promise(resolveAcceptP => {
-            console.log('resolveAcceptP',resolveAcceptP)
             dispatch({
                 type: ACTION_TYPES.ATTACH,
                 payload: {
@@ -39,14 +41,25 @@ const StoreContextProvider = ({ children }) => {
 
     const Player = {
         random: () => reach.hasRandom.random(),
-        getFinger: () => {
-            return 4
-        },
-        getGuess: () => {
-            return 5
+        getFingersAndGuess: async () => {
+            navigate('/morra')
+            const fingersAndGuess = await new Promise(resolveFingersAndGuessP => {
+                dispatch({
+                    type: ACTION_TYPES.FINGERS_AND_GUESS,
+                    payload: resolveFingersAndGuessP
+                })
+            })
+            
+            return [fingersAndGuess[0],fingersAndGuess[1]]
         },
         seeOutcome: (outcome) => {
-            console.log('outcome')
+            console.log('outcome',outcome)
+            navigate('/see-outcome')
+            const outcomeValue = parseInt(outcome)
+            dispatch({
+                type: ACTION_TYPES.SEE_OUTCOME,
+                payload: OUTCOME[outcomeValue]
+            })
         },
         informTimeout: () => {
             console.log('time out')
